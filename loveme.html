@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuva de Dinheiro</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      /* Para esconder gotas de chuva fora da tela */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      /* Para posicionar a chuva de dinheiro no topo da página */
+    }
+
+    .heart-container {
+      width: 100px;
+      height: 90px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      /* Coloca o coração na frente da chuva de dinheiro */
+    }
+
+    .heart::before,
+    .heart::after,
+    .crack {
+      position: absolute;
+      content: "";
+      left: 50px;
+      top: 0;
+      width: 50px;
+      height: 80px;
+      background-color: red;
+      border-radius: 50px 50px 0 0;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart::after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    .crack {
+      width: 10px;
+      height: 40px;
+      top: 10px;
+      left: 45px;
+      background-color: black;
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+
+    .money-rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /* Cobrindo toda a largura da tela */
+      height: 100%;
+      /* Cobrindo toda a altura da tela */
+      z-index: 1;
+      /* Coloca a chuva de dinheiro atrás do coração */
+    }
+
+    .money {
+      width: 100px;
+      height: 50px;
+      position: absolute;
+      animation: fall 3s linear infinite;
+      /* Agora é infinito */
+      opacity: 0;
+      /* Começa invisível */
+    }
+
+    /* Adicionando animação para cada gota de dinheiro */
+    @keyframes fall {
+      0% {
+        opacity: 1;
+        /* Torna a gota visível quando começa a cair */
+      }
+
+      100% {
+        transform: translateY(100vh);
+        /* Termina fora da tela, movendo-se para baixo */
+        opacity: 0;
+        /* Torna a gota invisível quando termina de cair */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="money-rain">
+    <!-- Várias gotas de dinheiro -->
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+    <img class="money" src="https://finanzero.com.br/images/uploads/2020/09/nota_de_200_viralata_caramelo.jpg"
+      alt="Money">
+    <!-- Adicione mais gotas de dinheiro se desejar -->
+  </div>
+
+  <div class="heart-container" id="heartContainer">
+    <div class="heart">
+      <div class="crack"></div>
+    </div>
+  </div>
+
+  <!-- Novo elemento para a imagem -->
+  <div id="imageContainer" style="display: none;">
+    <img src="https://uploads.metropoles.cloud/wp-content/uploads/2020/05/15081911/Nota-de-R-1-com-David-Luiz.jpeg"
+      alt="Money" style="width: 200px;">
+  </div>
+
+  <script>
+    // Obter todas as gotas de dinheiro
+    const moneyDrops = document.querySelectorAll('.money');
+
+    // Loop através de cada gota de dinheiro e definir um atraso e posição vertical aleatórios
+    moneyDrops.forEach(drop => {
+      drop.style.top = Math.random() * -100 + 'vh'; // Define uma posição inicial aleatória verticalmente acima da tela
+      drop.style.left = Math.random() * 100 + 'vw'; // Define uma posição horizontal aleatória
+      drop.style.animationDelay = Math.random() * 3 + 's'; // Define um atraso aleatório para cada gota
+    });
+
+    // Função para fazer o coração desaparecer depois de 1 segundo
+    setTimeout(() => {
+      const heartContainer = document.getElementById('heartContainer');
+      heartContainer.style.display = 'none';
+
+      // Mostrar a imagem depois que o coração desaparecer
+      const imageContainer = document.getElementById('imageContainer');
+      imageContainer.style.display = 'block';
+    }, 1000); // 1000 milissegundos = 1 segundo
+  </script>
+</body>
+
+</html>
